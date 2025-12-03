@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useCallback, useLayoutEffect} from 'react';
 import { View,ScrollView, Text, FlatList, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { getAllData , updateData} from '../../database/dbHelpers';
+import { getAllData , updateData, deleteData} from '../../database/dbHelpers';
 import { User } from '../../types/Objects';
 import ErrorBlock from '../../components/ErrorBlock';
 import LoadingSpiner from '../../components/LoadingSpiner';
@@ -89,7 +89,7 @@ const UserManagementScreen = () => {
                 try{
                   setIsLoading(true);
                   setErrorMessage('');
-                  await updateData(id, 'users', updatedFields);
+                  await deleteData(id, 'users');
                   const updatedUsers = getAllData('users');
                   setUsers(await updatedUsers);
                   Alert.alert('Thành công', `User #${id} đã được xóa!`);
