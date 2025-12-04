@@ -140,6 +140,27 @@ const ProductManagementScreen = () => {
   }
 
   const updateproduct = async(id: number) => {
+    setErrorPriceMessage('');
+    if(!name || !price || !selectedCategory ){
+        Alert.alert('Vui lòng điền đầy đủ thông tin');
+        return;
+    }
+    if (isNaN(price) || price <= 0) {
+        setErrorPriceMessage('Giá sản phẩm phải là số lớn hơn 0');
+        return;
+        }
+
+    if (price < 1000) {
+        setErrorPriceMessage('Giá sản phẩm phải từ 1.000đ trở lên');
+        return;
+    }
+    if(name.length < 5 ){
+        Alert.alert('Vui lòng điền ít nhất 5 ký tự cho tên sản phẩm');
+        return;
+    }
+    if(errorMessage){
+        return;
+    }
     for(const product of products){
         if (product.id === id){
             const newProduct = [
