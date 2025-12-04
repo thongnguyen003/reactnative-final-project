@@ -28,7 +28,8 @@ const ProductManagementScreen = () => {
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const [querySearch, setQuerySearch] = useState<string>('');
   const [isLoading, setIsLoading]= useState<boolean>(true);
-  const [errorMessage, setErrorMessage]= useState<string>('')
+  const [errorMessage, setErrorMessage]= useState<string>('');
+  const [errorPriceMessage, setErrorPriceMessage]= useState<string>('');
   
   const navigation = useNavigation<NavigationProp>();
 
@@ -84,8 +85,25 @@ const ProductManagementScreen = () => {
     setIdSelected(null);
 }
   const addProduct = async()=>{
+    setErrorPriceMessage('');
     if(!name || !price || !selectedCategory ){
         Alert.alert('Vui lòng điền đầy đủ thông tin');
+        return;
+    }
+    if (isNaN(price) || price <= 0) {
+        setErrorPriceMessage('Giá sản phẩm phải là số lớn hơn 0');
+        return;
+        }
+
+    if (price < 1000) {
+        setErrorPriceMessage('Giá sản phẩm phải từ 1.000đ trở lên');
+        return;
+    }
+    if(name.length < 5 ){
+        Alert.alert('Vui lòng điền ít nhất 5 ký tự cho tên sản phẩm');
+        return;
+    }
+    if(errorMessage){
         return;
     }
     const newProduct = [
@@ -215,6 +233,9 @@ const ProductManagementScreen = () => {
             value={name}
             onChangeText={text=>setName(text)}
         />
+        {errorPriceMessage &&(
+            <Text style={{color: 'red', marginBottom: 5, fontSize: 9}}>{errorPriceMessage}</Text>
+        )}
         <TextInput
             style={styles.input}
             placeholder='Nhập giá sản phẩm' 

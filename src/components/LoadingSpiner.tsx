@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     elevation: 5, // Đổ bóng cho đẹp trên Android
-    shadowColor: '#000', // Đổ bóng cho iOS
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

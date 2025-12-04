@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-// Nhận vào tin nhắn lỗi và hàm onRetry (để chạy lại khi bấm nút)
 const ErrorBlock = ({ message, onRetry }: { message: string, onRetry?: () => void }) => {
   return (
     <View style={styles.container}>
@@ -9,7 +8,6 @@ const ErrorBlock = ({ message, onRetry }: { message: string, onRetry?: () => voi
       <Text style={styles.title}>Đã xảy ra lỗi!</Text>
       <Text style={styles.message}>{message}</Text>
       
-      {/* Chỉ hiện nút Thử lại nếu có truyền hàm onRetry vào */}
       {onRetry && (
         <TouchableOpacity style={styles.button} onPress={onRetry}>
           <Text style={styles.buttonText}>Thử lại</Text>
@@ -24,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff5f5', // Màu nền đỏ rất nhạt
+    backgroundColor: '#fff5f5',
     padding: 20,
   },
   icon: {

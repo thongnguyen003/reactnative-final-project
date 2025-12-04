@@ -14,7 +14,7 @@ const ADMIN_MENU_ITEMS = [
 
 const HeaderMenu = () => {
   const [visible, setVisible] = useState(false);
-  const navigation = useNavigation<any>(); // Dùng any cho gọn, hoặc type chuẩn nếu muốn
+  const navigation = useNavigation<any>(); 
 
   const handleMenuItemPress = async (item: any) => {
     setVisible(false);
@@ -40,12 +40,9 @@ const HeaderMenu = () => {
 
   return (
     <View>
-      {/* Nút 3 gạch để mở menu */}
       <TouchableOpacity onPress={() => setVisible(true)} style={{ padding: 10 }}>
         <Text style={{ fontSize: 24 }}>☰</Text>
       </TouchableOpacity>
-
-      {/* Phần Modal Menu */}
       <Modal
         transparent={true}
         visible={visible}
@@ -90,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   menuContainer: {
-    marginTop: 50, // Chỉnh cái này nếu menu bị lệch so với header
+    marginTop: 50, 
     marginRight: 10,
     backgroundColor: 'white',
     borderRadius: 8,

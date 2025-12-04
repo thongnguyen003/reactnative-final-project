@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
-import { COLORS } from '../../constants/colors'; // Sử dụng file màu của bạn
+import { COLORS } from '../../constants/colors'; 
 
 const APP_INFO = {
-  name: "FoodLink", // Tên app của bạn
+  name: "FoodLink", 
   version: "1.0.0",
   description: "Ứng dụng đặt món ăn và mua sắm trực tuyến hàng đầu. Chúng tôi kết nối bạn với những cửa hàng uy tín nhất, mang đến bữa ăn ngon và sản phẩm chất lượng ngay trước cửa nhà bạn.",
   email: "support@foodlink.com",
@@ -14,7 +14,6 @@ const APP_INFO = {
 
 export default function AboutScreen() {
 
-  // Hàm mở liên kết (Gọi điện, Email, Web)
   const handleLink = (url: string) => {
     Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
   };
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
     elevation: 2, // Shadow cho Android
-    shadowColor: '#000', // Shadow cho iOS
+    shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowOffset: { width: 0, height: 2 },
   },

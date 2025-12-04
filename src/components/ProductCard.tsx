@@ -19,9 +19,6 @@ const ProductCard = ({ item }: { item: Product }) => {
         <Image source={{uri: item.image}} style={styles.productImage} />
         <Text style={styles.productName}>{item.name}</Text>
         <Text style={styles.productPrice}>{formatCurrency(item.price)}</Text>
-        {/* <TouchableOpacity style={styles.buyButton}>
-            <Text style={styles.buyButtonText}>Mua Ngay</Text>
-        </TouchableOpacity> */}
         </View>
     </TouchableOpacity>
   )

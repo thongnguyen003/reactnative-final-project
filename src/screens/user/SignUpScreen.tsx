@@ -21,7 +21,10 @@ const SignUpScreen = () => {
       Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ thông tin!');
       return;
     }
-
+    if (username.length <5 || password.length <5) {
+      Alert.alert('Lỗi', 'Vui lòng nhập ít nhất 6 ký tự cho các trường!');
+      return;
+    }
     try {
       setIsLoading(true);
       setErrorMessage('');

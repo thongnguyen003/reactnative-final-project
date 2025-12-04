@@ -170,9 +170,12 @@ const ProfileScreen = () => {
         </View>
       )}
 
-      <TouchableOpacity style={styles.historyBtn} onPress={()=>navigation.navigate('HomeTab', { screen: 'History' })}>
-        <Text style={styles.logoutText}>Xem lịch sử đơn hàng</Text>
-      </TouchableOpacity>
+      {user.role === 'user' && (
+        <TouchableOpacity style={styles.historyBtn} onPress={()=>navigation.navigate('HomeTab', { screen: 'History' })}>
+          <Text style={styles.logoutText}>Xem lịch sử đơn hàng</Text>
+        </TouchableOpacity>
+      )
+      }
       <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Text style={styles.logoutText}>Đăng Xuất</Text>
       </TouchableOpacity>

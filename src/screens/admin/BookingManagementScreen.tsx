@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image, Modal, Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Order, Product } from '../../types/Objects';
-import { getAllData, updateData } from '../../database/dbHelpers'; // Nhớ import hàm mới
+import { getAllData, updateData } from '../../database/dbHelpers';
 import { COLORS, BORDER } from '../../constants/colors';
 import { formatCurrency } from '../../utils/formatCurrency';
 import LoadingSpiner from '../../components/LoadingSpiner';
@@ -28,7 +28,6 @@ export default function BookingManagementScreen() {
         headerRight: () => <HeaderMenu />,
         });
     }, [navigation]);     
-  // State cho Modal cập nhật trạng thái
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
@@ -37,7 +36,6 @@ export default function BookingManagementScreen() {
       setIsLoading(true);
       setErrorMessage('');
       
-      // Admin lấy tất cả đơn hàng và tất cả sản phẩm để map thông tin
       const [allOrders, allProducts] = await Promise.all([
         getAllData('orders'),
         getAllData('products'),
@@ -58,7 +56,6 @@ export default function BookingManagementScreen() {
     }, [initScreen])
   );
 
-  // Xử lý khi bấm nút "Cập nhật" trong Modal
   const handleUpdateStatus = async (newStatus: string) => {
     if (!selectedOrder) return;
     try {
@@ -96,7 +93,6 @@ export default function BookingManagementScreen() {
       
       <Text style={styles.headerTitle}>🛠 Quản Lý Đơn Hàng</Text>
 
-      {/* 1. Status Tabs (Giống HistoryScreen) */}
       <View style={styles.statusRow}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {STATUS_LIST.map(s => (
@@ -196,38 +192,133 @@ export default function BookingManagementScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: COLORS.BACKGROUND },
-  headerTitle: { fontSize: 22, fontWeight: '800', color: COLORS.PRIMARY, marginBottom: 15, textAlign: 'center' },
+  container: { 
+    flex: 1, padding: 16, 
+    backgroundColor: COLORS.BACKGROUND 
+  },
+  headerTitle: { 
+    fontSize: 22, 
+    fontWeight: '800', 
+    color: COLORS.PRIMARY, 
+    marginBottom: 15, 
+    textAlign: 'center' 
+  },
   
   // Tabs Style
-  statusRow: { flexDirection: 'row', marginBottom: 10, height: 40 },
-  statusBtn: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, backgroundColor: '#eee', marginRight: 8, justifyContent: 'center' },
-  statusBtnActive: { backgroundColor: COLORS.PRIMARY },
-  statusText: { fontSize: 12, fontWeight: '600', color: '#555' },
+  statusRow: { 
+    flexDirection: 'row', 
+    marginBottom: 10, 
+    height: 40 
+  },
+  statusBtn: { 
+    paddingVertical: 8, 
+    paddingHorizontal: 16, 
+    borderRadius: 20, 
+    backgroundColor: '#eee', 
+    marginRight: 8, 
+    justifyContent: 'center' 
+  },
+  statusBtnActive: { 
+    backgroundColor: COLORS.PRIMARY 
+  },
+  statusText: { 
+    fontSize: 12, 
+    fontWeight: '600', 
+    color: '#555' 
+  },
   statusTextActive: { color: 'white' },
 
   // Card Style
-  card: { backgroundColor: 'white', padding: 12, borderRadius: 12, marginBottom: 12, elevation: 3, borderWidth: 1, borderColor: '#eee' },
-  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8, borderBottomWidth: 0.5, borderBottomColor: '#eee', paddingBottom: 5 },
-  orderId: { fontWeight: 'bold', color: '#333' },
-  dateText: { fontSize: 12, color: '#888' },
+  card: { 
+    backgroundColor: 'white', 
+    padding: 12, borderRadius: 12, 
+    marginBottom: 12, elevation: 3, 
+    borderWidth: 1, 
+    borderColor: '#eee' 
+  },
+  cardHeader: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginBottom: 8, 
+    borderBottomWidth: 0.5, 
+    borderBottomColor: '#eee', 
+    paddingBottom: 5 
+  },
+  orderId: { 
+    fontWeight: 'bold', 
+    color: '#333' 
+  },
+  dateText: { 
+    fontSize: 12, 
+    color: '#888' 
+  },
   
   cardBody: { flexDirection: 'row' },
-  image: { width: 60, height: 60, borderRadius: 8, backgroundColor: '#eee' },
-  name: { fontSize: 15, fontWeight: '700', color: COLORS.TEXT_PRIMARY },
-  qty: { marginTop: 4, fontSize: 13, color: '#666' },
+  image: { 
+    width: 60, 
+    height: 60, 
+    borderRadius: 8, 
+    backgroundColor: '#eee' 
+},
+  name: { 
+    fontSize: 15, 
+    fontWeight: '700', 
+    color: COLORS.TEXT_PRIMARY 
+  },
+  qty: {
+     marginTop: 4, 
+     fontSize: 13, 
+     color: '#666' 
+  },
   total: { marginTop: 4, fontWeight: '700', color: COLORS.PRICE },
 
-  actionBtn: { marginTop: 12, backgroundColor: COLORS.SECONDARY, padding: 10, borderRadius: 8, alignItems: 'center' },
-  actionBtnText: { color: COLORS.TEXT_PRIMARY, fontWeight: '600', fontSize: 14 },
+  actionBtn: { 
+    marginTop: 12, 
+    backgroundColor: COLORS.SECONDARY, 
+    padding: 10, borderRadius: 8, 
+    alignItems: 'center' 
+  },
+  actionBtnText: { 
+    color: COLORS.TEXT_PRIMARY, 
+    fontWeight: '600', 
+    fontSize: 14 
+  },
 
   emptyText: { textAlign: 'center', marginTop: 40, color: '#888' },
 
   // Modal Style
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center' },
-  modalContent: { width: '85%', backgroundColor: 'white', borderRadius: 14, padding: 20, alignItems: 'center' },
-  modalTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 5, color: COLORS.PRIMARY },
-  modalOption: { width: '100%', padding: 12, borderBottomWidth: 1, borderBottomColor: '#eee', alignItems: 'center' },
-  modalOptionText: { fontSize: 16, color: '#333' },
-  closeBtn: { marginTop: 15, backgroundColor: COLORS.PRICE, paddingVertical: 10, paddingHorizontal: 30, borderRadius: 8 },
+  modalOverlay: { 
+    flex: 1, 
+    backgroundColor: 'rgba(0,0,0,0.5)', 
+    justifyContent: 'center', alignItems: 'center' },
+    modalContent: { width: '85%', 
+    backgroundColor: 'white', 
+    borderRadius: 14, 
+    padding: 20, 
+    alignItems: 'center' 
+  },
+  modalTitle: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    marginBottom: 5, 
+    color: COLORS.PRIMARY 
+  },
+  modalOption: { 
+    width: '100%', 
+    padding: 12, 
+    borderBottomWidth: 1, 
+    borderBottomColor: '#eee', 
+    alignItems: 'center' 
+  },
+  modalOptionText: { 
+    fontSize: 16, 
+    color: '#333' 
+  },
+  closeBtn: { 
+    marginTop: 15, 
+    backgroundColor: COLORS.PRICE, 
+    paddingVertical: 10, 
+    paddingHorizontal: 30, 
+    borderRadius: 8 
+  },
 });

@@ -7,7 +7,6 @@ import { COLORS } from '../../constants/colors';
 
 const { width } = Dimensions.get('window');
 
-// Thêm icon và màu sắc cho từng mục
 const DASHBOARD_ITEMS = [
   { id: '5', title: 'QL Đơn hàng', subtitle: 'Xử lý đơn đặt', screen: 'BookingManagement', icon: '📦', color: '#e3f2fd', textColor: '#1565c0' },
   { id: '3', title: 'QL Sản phẩm', subtitle: 'Thêm/Sửa/Xóa', screen: 'ProductManagement', icon: '🍔', color: '#e8f5e9', textColor: '#2e7d32' },
@@ -22,7 +21,7 @@ const DashBoardScreen = () => {
     navigation.setOptions({
       title: 'Trang Quản Trị',
       headerRight: () => <HeaderMenu />,
-      headerStyle: { backgroundColor: COLORS.PRIMARY }, // Tùy chỉnh màu header
+      headerStyle: { backgroundColor: COLORS.PRIMARY },
       headerTintColor: '#fff',
     });
   }, [navigation]);

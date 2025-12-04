@@ -51,6 +51,10 @@ const CategoryManagementScreen = () => {
             Alert.alert('Vui lòng nhập tên danh mục');
             return;
         }
+        if(name.length < 2 ){
+            Alert.alert('Vui lòng nhập ít nhất 2 ký tự cho tên danh mục');
+            return;
+        }
         const newCategory = [
             {field: 'name', newValue: name},
         ];
@@ -72,6 +76,10 @@ const CategoryManagementScreen = () => {
     const updateCategory = async (id: number) => {
         if(!name){
             Alert.alert('Vui lòng nhập tên danh mục');
+            return;
+        }
+        if(name.length < 2 ){
+            Alert.alert('Vui lòng nhập ít nhất 2 ký tự cho tên danh mục');
             return;
         }
         const updatedCategory = [

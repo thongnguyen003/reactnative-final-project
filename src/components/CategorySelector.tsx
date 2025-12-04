@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-// Giả định 'database' chứa định nghĩa cho Category
 import { Category } from '../types/Objects';
 
 interface Props {
@@ -43,7 +42,6 @@ const CategorySelector = ({ categories, selectedId, onSelect }: Props) => {
   );
 };
 
-// --- STYLESHEET (Định dạng) ---
 const styles = StyleSheet.create({
   container: { 
     flexDirection: 'row', 
