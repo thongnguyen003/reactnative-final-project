@@ -22,7 +22,7 @@ export type HomeStackParamList = {
 export type AdminStackParamList = {  
     Dashboard: undefined;
     CategoryManagement: undefined;
-    ProductManagement: undefined;
+    ProductManagement: {categoryId?: number};
     ProductDetail: { product: Product }; 
     UserManagement: undefined;
     BookingManagement: undefined;

@@ -189,6 +189,11 @@ const CategoryManagementScreen = () => {
                             onPress={() => deleteCategory(item.id)}>
                             <Text style={styles.actionText}>🗑</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.deleteBtn}
+                            onPress={() => navigation.navigate('ProductManagement', { categoryId: item.id})}>
+                            <Text style={styles.actionText}>Add</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             )}

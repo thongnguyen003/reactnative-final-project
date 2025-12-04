@@ -4,7 +4,7 @@ import {Picker} from '@react-native-picker/picker';
 import { launchImageLibrary ,ImageLibraryOptions} from 'react-native-image-picker';
 import { getAllData, searchProductsByNameOrCategory, insertData, deleteData, updateData } from '../../database/dbHelpers';
 import { Product,Category } from '../../types/Objects';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, RouteProp, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AdminStackParamList } from '../../types/Params';
 import HeaderMenu from '../../components/HeaderMenu';   
@@ -14,14 +14,16 @@ import {COLORS, FONT_SIZE, BORDER} from '../../constants/colors';
 import {formatCurrency} from '../../utils/formatCurrency'
 
 type NavigationProp = NativeStackNavigationProp<AdminStackParamList, 'ProductManagement'>;
-
+type ProductRouteProp = RouteProp<AdminStackParamList, 'ProductManagement'>;
 
 const ProductManagementScreen = () => {
+  const route = useRoute<ProductRouteProp>();
+  const categoryId = route.params?.categoryId;
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(categories.length >0 ? categories[0].id : null);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [image,setImage] = useState<string>('');
   const [idSelected, setIdSelected] = useState<number | null>(null);
   const [querySearch, setQuerySearch] = useState<string>('');
@@ -44,11 +46,11 @@ const ProductManagementScreen = () => {
         const productsData = await getAllData('products');
         setCategories(categoriesData)
         setProducts(productsData)
+        setSelectedCategory(categoryId ? categoryId : (categoriesData.length >0 ? categoriesData[0].id : null));
     }catch(err: any){
         setErrorMessage(err.message || 'Unidentified error')
     }finally{
         setIsLoading(false);
-        clear();
     }
   },[])
 
