@@ -82,8 +82,6 @@ const DashBoardScreen = () => {
         <Text style={styles.logoutText}>🚪 Đăng xuất hệ thống</Text>
       </TouchableOpacity>
 
-      <Text style={styles.versionText}>Phiên bản Admin 1.0.0</Text>
-
     </ScrollView>
   )
 }
